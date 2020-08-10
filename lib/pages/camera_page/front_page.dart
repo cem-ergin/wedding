@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:aycacem/blocs/images/images_bloc.dart';
 import 'package:aycacem/blocs/is_loading/is_loading_bloc.dart';
-import 'package:aycacem/pages/camera_page/front_page.dart';
+import 'package:aycacem/pages/camera_page/camera_page.dart';
 import 'package:aycacem/providers/user_provider.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -12,14 +12,14 @@ import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
-class CameraPage extends StatefulWidget {
-  CameraPage({Key key}) : super(key: key);
+class FrontCamera extends StatefulWidget {
+  FrontCamera({Key key}) : super(key: key);
 
   @override
-  _CameraPageState createState() => _CameraPageState();
+  _FrontCameraState createState() => _FrontCameraState();
 }
 
-class _CameraPageState extends State<CameraPage> {
+class _FrontCameraState extends State<FrontCamera> {
   CameraController _controller;
   Future<void> _initializeControllerFuture;
   bool isCameraReady = false;
@@ -42,7 +42,7 @@ class _CameraPageState extends State<CameraPage> {
 
   Future<void> _initializeCamera() async {
     final cameras = await availableCameras();
-    final firstCamera = cameras.first;
+    final firstCamera = cameras.last;
     _controller = CameraController(firstCamera, ResolutionPreset.veryHigh);
     _initializeControllerFuture = _controller.initialize();
     if (!mounted) {
@@ -211,7 +211,7 @@ class _CameraPageState extends State<CameraPage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) => FrontCamera(),
+                                    builder: (_) => CameraPage(),
                                   ),
                                 );
                               },

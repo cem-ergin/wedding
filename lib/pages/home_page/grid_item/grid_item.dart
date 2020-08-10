@@ -4,8 +4,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class GridItem extends StatefulWidget {
-  final DocumentSnapshot image;
-  GridItem({Key key, @required this.image}) : super(key: key);
+  final List<DocumentSnapshot> image;
+  final int index;
+  final int maxIndex;
+  GridItem(
+      {Key key,
+      @required this.image,
+      @required this.index,
+      @required this.maxIndex})
+      : super(key: key);
 
   @override
   _GridItemState createState() => _GridItemState();
@@ -27,14 +34,18 @@ class _GridItemState extends State<GridItem>
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (_) => GalleryPhotoDetail(image: widget.image)));
+                  builder: (_) => GalleryPhotoDetail(
+                        image: widget.image,
+                        index: widget.index,
+                        maxIndex: widget.maxIndex,
+                      )));
         },
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16.0),
           child: GridTile(
             child: CachedNetworkImage(
               fit: BoxFit.cover,
-              imageUrl: widget.image["imageUrl"],
+              imageUrl: widget.image[widget.index]["imageUrl"],
               placeholder: (context, url) =>
                   Image.asset("assets/gifs/loading.gif"),
               errorWidget: (context, url, error) => Icon(Icons.error),

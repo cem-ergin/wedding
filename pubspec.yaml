@@ -49,6 +49,10 @@ dependencies:
   url_launcher: ^5.5.0
   camera: ^0.5.8+2
   path_provider: ^1.6.11
+  gallery_saver: ^2.0.1
+  paging: ^0.1.0
+  flutter_pagewise:
+  flutter_speed_dial: ^1.2.5
 
 dev_dependencies:
   flutter_test:

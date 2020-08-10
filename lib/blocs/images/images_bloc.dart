@@ -60,12 +60,6 @@ class ImagesBloc extends Bloc<ImagesEvent, ImagesState> {
           'createdAt': DateTime.now().millisecondsSinceEpoch.toString(),
           'contentType': mimeType.contentType,
         });
-        final firestoreInstance = Firestore.instance;
-        final _querySnapshot = await firestoreInstance
-            .collection("images")
-            .orderBy("createdAt")
-            .getDocuments();
-        yield ImagesLoadedState(querySnapshot: _querySnapshot);
         _stopProgress();
         event.isLoadingBloc.add(LoadedEvent());
       } on Exception catch (e) {
